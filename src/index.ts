@@ -10,6 +10,7 @@ interface PageEvent {
 	event: string;
 	href: string;
 	ip: string;
+	extra?: string;
 }
 
 export class SLClient {
