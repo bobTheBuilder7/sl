@@ -1,6 +1,6 @@
 {
   "name": "sl",
-  "version": "0.0.3",
+  "version": "0.0.7",
   "type": "module",
   "main": "./dist/index.mjs",
   "types": "./dist/index.d.mts",
@@ -12,8 +12,7 @@
   },
   "scripts": {
     "build": "tsdown",
-    "dev": "tsdown --watch",
-    "prepare": "tsdown"
+    "dev": "tsdown --watch"
   },
   "files": [
     "dist"
