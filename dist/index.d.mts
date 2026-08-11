@@ -15,8 +15,9 @@ interface PageEvent {
 declare class SLClient {
   private baseUrl;
   constructor(baseUrl: string);
-  pageVisit(b: PageVisit): Promise<void>;
-  pageEvent(b: PageEvent): Promise<void>;
+  private post;
+  pageVisit(payload: PageVisit): Promise<void>;
+  pageEvent(payload: PageEvent): Promise<void>;
 }
 //#endregion
 export { SLClient };

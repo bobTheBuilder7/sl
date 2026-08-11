@@ -2,23 +2,22 @@
 var SLClient = class {
 	baseUrl;
 	constructor(baseUrl) {
-		this.baseUrl = baseUrl;
+		this.baseUrl = baseUrl.replace(/\/+$/, "");
 	}
-	async pageVisit(b) {
-		try {
-			await fetch(`${this.baseUrl}/api/slytics/visit`, {
-				method: "POST",
-				body: JSON.stringify(b)
-			});
-		} catch {}
+	async post(path, payload) {
+		const response = await fetch(`${this.baseUrl}${path}`, {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(payload),
+			signal: AbortSignal.timeout(5e3)
+		});
+		if (!response.ok) throw new Error(`SL analytics request failed with status ${response.status}`);
 	}
-	async pageEvent(b) {
-		try {
-			await fetch(`${this.baseUrl}/api/slytics/event`, {
-				method: "POST",
-				body: JSON.stringify(b)
-			});
-		} catch {}
+	async pageVisit(payload) {
+		await this.post("/api/slytics/visit", payload);
+	}
+	async pageEvent(payload) {
+		await this.post("/api/slytics/event", payload);
 	}
 };
 //#endregion
