@@ -7,6 +7,30 @@
  * }} DoctorResponse
  */
 
+/**
+ * @typedef {{
+ * 	id: number;
+ * 	name: string;
+ * 	price: number;
+ * 	old_price: number;
+ * 	website_order: number;
+ * 	href: string;
+ * 	category_id: number;
+ * }} Service
+ */
+
+/** @typedef {{ id: number; name: string }} Category */
+
+/** @typedef {{ id: number; name: string; position: string }} Doctor */
+
+/** @typedef {{ doctors: Doctor[] }} DoctorsResponse */
+
+/** @typedef {{ services: Service[]; categories: Category[] }} PricesResponse */
+
+/** @typedef {{ title: string; description: string; keywords: string }} SeoResponse */
+
+/** @typedef {{ price: number; old_price: number }} DealResponse */
+
 /** Client for sending page visits and events to the SL analytics API. */
 export class SLClient {
 	#baseUrl;
@@ -41,9 +65,9 @@ export class SLClient {
 
 	/**
 	 * @param {string} path
-	 * @returns {Promise<void>}
+	 * @returns {Promise<unknown>}
 	 */
-	async #get(path, payload) {
+	async #get(path) {
 		const req = await fetch(`${this.#baseUrl}${path}`, {
 			method: 'GET',
 			headers: {
@@ -88,5 +112,49 @@ export class SLClient {
 		const doctor = await this.#post(`/api/cms/doctors/${id}`, { locale });
 
 		return doctor;
+	}
+
+	/** @returns {Promise<PricesResponse>} */
+	async getPrices() {
+		const prices = await this.#get('/api/cms/prices');
+
+		return prices;
+	}
+
+	/** @returns {Promise<Doctor[]>} */
+	async getMainDoctors() {
+		const doctors = await this.#get('/api/cms/doctors/main');
+
+		return doctors;
+	}
+
+	/**
+	 * @param {{ locale: Locale }} params
+	 * @returns {Promise<DoctorsResponse>}
+	 */
+	async getDoctors({ locale }) {
+		const doctors = await this.#post('/api/cms/doctors', { locale });
+
+		return doctors;
+	}
+
+	/**
+	 * @param {{ pathname: string }} params
+	 * @returns {Promise<SeoResponse>}
+	 */
+	async getSeo({ pathname }) {
+		const seo = await this.#post('/api/cms/seo', { pathname });
+
+		return seo;
+	}
+
+	/**
+	 * @param {{ name: string }} params
+	 * @returns {Promise<DealResponse>}
+	 */
+	async getDeal({ name }) {
+		const deal = await this.#post('/api/cms/deals', { name });
+
+		return deal;
 	}
 }
