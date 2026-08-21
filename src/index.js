@@ -23,6 +23,45 @@
 
 /** @typedef {{ id: number; name: string; position: string }} Doctor */
 
+/**
+ * @typedef {{
+ * 	id: number;
+ * 	state: string;
+ * 	employee_name: string;
+ * 	price: number;
+ * 	old_price: number;
+ * }} AllPlan
+ */
+
+/**
+ * @typedef {{
+ * 	id: number;
+ * 	state: string;
+ * 	employee_name: string;
+ * 	price_after_discounts: number;
+ * 	price_before_discounts: number;
+ * 	old_price: number;
+ * }} Plan
+ */
+
+/**
+ * @typedef {{
+ * 	id: number;
+ * 	name: string;
+ * 	price: number;
+ * 	discount: number;
+ * 	what_treating: string;
+ * 	step: number;
+ * 	when_paid: number;
+ * 	when_completed: number;
+ * 	old_price: number;
+ * 	full_name: string | null;
+ * 	special: string | null;
+ * }} Treatment
+ */
+
+/** @typedef {{ plan: Plan; treatments: Treatment[]; missing_teeth: string[] }} PlanResponse */
+
 /** @typedef {{ doctors: Doctor[] }} DoctorsResponse */
 
 /** @typedef {{ services: Service[]; categories: Category[] }} PricesResponse */
@@ -31,6 +70,7 @@
 
 /** @typedef {{ price: number; old_price: number }} DealResponse */
 
+/** @typedef {{ message: string }} CreateWebsiteAppointmentResponse */
 /** Client for sending page visits and events to the SL analytics API. */
 export class SLClient {
 	#baseUrl;
@@ -156,5 +196,43 @@ export class SLClient {
 		const deal = await this.#post('/api/cms/deals', { name });
 
 		return deal;
+	}
+
+	/**
+	 * @param {{ name: string; phone: string; email: string; website: string }} payload
+	 * @returns {Promise<CreateWebsiteAppointmentResponse>}
+	 */
+	async createWebsiteAppointment(payload) {
+		const appointment = await this.#post('/api/book-an-appointment', payload);
+
+		return appointment;
+	}
+
+	/**
+	 * @param {{ certificate_id: number; firstname: string; lastname: string }} payload
+	 * @returns {Promise<void>}
+	 */
+	async updateCertificateName(payload) {
+		await this.#post('/api/certificates', payload);
+	}
+
+	/**
+	 * @param {{ patient_id: number }} params
+	 * @returns {Promise<AllPlan[]>}
+	 */
+	async getPlans({ patient_id }) {
+		const plans = await this.#post('/api/patients/plans', { patient_id });
+
+		return plans;
+	}
+
+	/**
+	 * @param {{ patient_id: number; plan_id: number }} params
+	 * @returns {Promise<PlanResponse>}
+	 */
+	async getPlan({ patient_id, plan_id }) {
+		const plan = await this.#post('/api/patients/plan', { patient_id, plan_id });
+
+		return plan;
 	}
 }
