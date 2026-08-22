@@ -62,7 +62,7 @@
 
 /** @typedef {{ plan: Plan; treatments: Treatment[]; missing_teeth: string[] }} PlanResponse */
 
-/** @typedef {{ doctors: Doctor[] }} DoctorsResponse */
+/** @typedef {{ doctors: Doctor[]; contents: { doctor_id: number; body: string; lvl: number }[] }} DoctorsResponse */
 
 /** @typedef {{ services: Service[]; categories: Category[] }} PricesResponse */
 
