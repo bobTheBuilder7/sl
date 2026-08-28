@@ -9,6 +9,7 @@ export type DoctorResponse = {
 	contents: {
 		body: string;
 		lvl: number;
+		pathname: string | null;
 	}[];
 };
 export type Service = {
@@ -89,7 +90,7 @@ export type CreateWebsiteAppointmentResponse = {
 /**
  * @typedef {{
  * 	doctor: { id: number; name: string; position: string };
- * 	contents: { body: string; lvl: number }[];
+ * 	contents: { body: string; lvl: number; pathname: string | null }[];
  * }} DoctorResponse
  */
 /**

@@ -3,7 +3,7 @@
 /**
  * @typedef {{
  * 	doctor: { id: number; name: string; position: string };
- * 	contents: { body: string; lvl: number }[];
+ * 	contents: { body: string; lvl: number; pathname: string | null }[];
  * }} DoctorResponse
  */
 
