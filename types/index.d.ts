@@ -87,6 +87,16 @@ export type DealResponse = {
 export type CreateWebsiteAppointmentResponse = {
 	message: string;
 };
+export type PageMarkdownResponse = {
+	page: {
+		markdown: string;
+		service_ids: number[];
+	};
+	services: {
+		id: number;
+		price: number;
+	}[];
+};
 /**
  * @typedef {{
  * 	doctor: { id: number; name: string; position: string };
@@ -146,6 +156,12 @@ export type CreateWebsiteAppointmentResponse = {
 /** @typedef {{ title: string; description: string; keywords: string }} SeoResponse */
 /** @typedef {{ price: number; old_price: number }} DealResponse */
 /** @typedef {{ message: string }} CreateWebsiteAppointmentResponse */
+/**
+ * @typedef {{
+ * 	page: { markdown: string; service_ids: number[] };
+ * 	services: { id: number; price: number }[];
+ * }} PageMarkdownResponse
+ */
 /** Client for sending page visits and events to the SL analytics API. */
 export declare class SLClient {
 	#private;
@@ -210,4 +226,9 @@ export declare class SLClient {
 	 * @returns {Promise<PlanResponse>}
 	 */
 	getPlan({ patient_id, plan_id }: { patient_id: number; plan_id: number }): Promise<PlanResponse>;
+	/**
+	 * @param {{ pathname: string }} params
+	 * @returns {Promise<PageMarkdownResponse>}
+	 */
+	getPageMarkdown({ pathname }: { pathname: string }): Promise<PageMarkdownResponse>;
 }

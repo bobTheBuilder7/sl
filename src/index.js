@@ -71,6 +71,13 @@
 /** @typedef {{ price: number; old_price: number }} DealResponse */
 
 /** @typedef {{ message: string }} CreateWebsiteAppointmentResponse */
+
+/**
+ * @typedef {{
+ * 	page: { markdown: string; service_ids: number[] };
+ * 	services: { id: number; price: number }[];
+ * }} PageMarkdownResponse
+ */
 /** Client for sending page visits and events to the SL analytics API. */
 export class SLClient {
 	#baseUrl;
@@ -234,5 +241,15 @@ export class SLClient {
 		const plan = await this.#post('/api/patients/plan', { patient_id, plan_id });
 
 		return plan;
+	}
+
+	/**
+	 * @param {{ pathname: string }} params
+	 * @returns {Promise<PageMarkdownResponse>}
+	 */
+	async getPageMarkdown({ pathname }) {
+		const page = await this.#post('/api/cms/service', { pathname });
+
+		return page;
 	}
 }
