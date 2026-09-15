@@ -87,6 +87,10 @@ export type DealResponse = {
 export type CreateWebsiteAppointmentResponse = {
 	message: string;
 };
+export type ClinicDoctor = {
+	clinic_id: number;
+	employee_id: number;
+};
 export type PageMarkdownResponse = {
 	page: {
 		markdown: string;
@@ -156,6 +160,7 @@ export type PageMarkdownResponse = {
 /** @typedef {{ title: string; description: string; keywords: string }} SeoResponse */
 /** @typedef {{ price: number; old_price: number }} DealResponse */
 /** @typedef {{ message: string }} CreateWebsiteAppointmentResponse */
+/** @typedef {{ clinic_id: number; employee_id: number }} ClinicDoctor */
 /**
  * @typedef {{
  * 	page: { markdown: string; service_ids: number[] };
@@ -231,4 +236,6 @@ export declare class SLClient {
 	 * @returns {Promise<PageMarkdownResponse>}
 	 */
 	getPageMarkdown({ pathname }: { pathname: string }): Promise<PageMarkdownResponse>;
+	/** @returns {Promise<ClinicDoctor[]>} */
+	getClinicDoctors(): Promise<ClinicDoctor[]>;
 }

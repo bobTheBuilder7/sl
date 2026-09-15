@@ -72,6 +72,8 @@
 
 /** @typedef {{ message: string }} CreateWebsiteAppointmentResponse */
 
+/** @typedef {{ clinic_id: number; employee_id: number }} ClinicDoctor */
+
 /**
  * @typedef {{
  * 	page: { markdown: string; service_ids: number[] };
@@ -251,5 +253,12 @@ export class SLClient {
 		const page = await this.#post('/api/cms/service', { pathname });
 
 		return page;
+	}
+
+	/** @returns {Promise<ClinicDoctor[]>} */
+	async getClinicDoctors() {
+		const doctors = await this.#get('/api/cms/clinics/schedules');
+
+		return doctors;
 	}
 }
