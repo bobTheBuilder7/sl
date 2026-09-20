@@ -2,7 +2,7 @@
 
 /**
  * @typedef {{
- * 	doctor: { id: number; name: string; position: string };
+ * 	doctor: { id: number; name: string; position: string; yandex_specialization: string };
  * 	contents: { body: string; lvl: number; pathname: string | null }[];
  * }} DoctorResponse
  */
@@ -21,7 +21,7 @@
 
 /** @typedef {{ id: number; name: string }} Category */
 
-/** @typedef {{ id: number; name: string; position: string }} Doctor */
+/** @typedef {{ id: number; name: string; position: string; yandex_specialization: string }} Doctor */
 
 /**
  * @typedef {{
