@@ -25,6 +25,7 @@ export type Service = {
 export type Category = {
 	id: number;
 	name: string;
+	yandex_specialization: string;
 };
 export type Doctor = {
 	id: number;
@@ -120,7 +121,7 @@ export type PageMarkdownResponse = {
  * 	category_id: number;
  * }} Service
  */
-/** @typedef {{ id: number; name: string }} Category */
+/** @typedef {{ id: number; name: string; yandex_specialization: string }} Category */
 /** @typedef {{ id: number; name: string; position: string; yandex_specialization: string }} Doctor */
 /**
  * @typedef {{

@@ -19,7 +19,7 @@
  * }} Service
  */
 
-/** @typedef {{ id: number; name: string }} Category */
+/** @typedef {{ id: number; name: string; yandex_specialization: string }} Category */
 
 /** @typedef {{ id: number; name: string; position: string; yandex_specialization: string }} Doctor */
 
