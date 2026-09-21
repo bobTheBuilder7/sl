@@ -6,6 +6,7 @@ export type DoctorResponse = {
 		name: string;
 		position: string;
 		yandex_specialization: string;
+		yandex_doc_id: string;
 	};
 	contents: {
 		body: string;
@@ -32,6 +33,7 @@ export type Doctor = {
 	name: string;
 	position: string;
 	yandex_specialization: string;
+	yandex_doc_id: string;
 };
 export type AllPlan = {
 	id: number;
@@ -106,7 +108,7 @@ export type PageMarkdownResponse = {
 };
 /**
  * @typedef {{
- * 	doctor: { id: number; name: string; position: string; yandex_specialization: string };
+ * 	doctor: { id: number; name: string; position: string; yandex_specialization: string; yandex_doc_id: string };
  * 	contents: { body: string; lvl: number; pathname: string | null }[];
  * }} DoctorResponse
  */
@@ -122,7 +124,7 @@ export type PageMarkdownResponse = {
  * }} Service
  */
 /** @typedef {{ id: number; name: string; yandex_specialization: string }} Category */
-/** @typedef {{ id: number; name: string; position: string; yandex_specialization: string }} Doctor */
+/** @typedef {{ id: number; name: string; position: string; yandex_specialization: string; yandex_doc_id: string }} Doctor */
 /**
  * @typedef {{
  * 	id: number;
