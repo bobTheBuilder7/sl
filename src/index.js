@@ -170,9 +170,12 @@ export class SLClient {
 		return prices;
 	}
 
-	/** @returns {Promise<Doctor[]>} */
-	async getMainDoctors() {
-		const doctors = await this.#get('/api/cms/doctors/main');
+	/**
+	 * @param {{ locale: Locale }} params
+	 * @returns {Promise<Doctor[]>}
+	 */
+	async getMainDoctors({ locale }) {
+		const doctors = await this.#post('/api/cms/doctors/main', { locale });
 
 		return doctors;
 	}
