@@ -1,110 +1,110 @@
 /** @typedef {'hy' | 'ru' | 'en'} Locale */
 export type Locale = 'hy' | 'ru' | 'en';
 export type DoctorResponse = {
-    doctor: {
-        id: number;
-        name: string;
-        position: string;
-        yandex_specialization: string;
-        yandex_doc_id: string;
-    };
-    contents: {
-        body: string;
-        lvl: number;
-        pathname: string | null;
-    }[];
+	doctor: {
+		id: number;
+		name: string;
+		position: string;
+		yandex_specialization: string;
+		yandex_doc_id: string;
+	};
+	contents: {
+		body: string;
+		lvl: number;
+		pathname: string | null;
+	}[];
 };
 export type Service = {
-    id: number;
-    name: string;
-    price: number;
-    old_price: number;
-    website_order: number;
-    href: string;
-    category_id: number;
+	id: number;
+	name: string;
+	price: number;
+	old_price: number;
+	website_order: number;
+	href: string;
+	category_id: number;
 };
 export type Category = {
-    id: number;
-    name: string;
-    yandex_specialization: string;
+	id: number;
+	name: string;
+	yandex_specialization: string;
 };
 export type Doctor = {
-    id: number;
-    name: string;
-    position: string;
-    yandex_specialization: string;
-    yandex_doc_id: string;
+	id: number;
+	name: string;
+	position: string;
+	yandex_specialization: string;
+	yandex_doc_id: string;
 };
 export type AllPlan = {
-    id: number;
-    state: string;
-    employee_name: string;
-    price: number;
-    old_price: number;
+	id: number;
+	state: string;
+	employee_name: string;
+	price: number;
+	old_price: number;
 };
 export type Plan = {
-    id: number;
-    state: string;
-    employee_name: string;
-    price_after_discounts: number;
-    price_before_discounts: number;
-    old_price: number;
+	id: number;
+	state: string;
+	employee_name: string;
+	price_after_discounts: number;
+	price_before_discounts: number;
+	old_price: number;
 };
 export type Treatment = {
-    id: number;
-    name: string;
-    price: number;
-    discount: number;
-    what_treating: string;
-    step: number;
-    when_paid: number;
-    when_completed: number;
-    old_price: number;
-    full_name: string | null;
-    special: string | null;
+	id: number;
+	name: string;
+	price: number;
+	discount: number;
+	what_treating: string;
+	step: number;
+	when_paid: number;
+	when_completed: number;
+	old_price: number;
+	full_name: string | null;
+	special: string | null;
 };
 export type PlanResponse = {
-    plan: Plan;
-    treatments: Treatment[];
-    missing_teeth: string[];
+	plan: Plan;
+	treatments: Treatment[];
+	missing_teeth: string[];
 };
 export type DoctorsResponse = {
-    doctors: Doctor[];
-    contents: {
-        doctor_id: number;
-        body: string;
-        lvl: number;
-    }[];
+	doctors: Doctor[];
+	contents: {
+		doctor_id: number;
+		body: string;
+		lvl: number;
+	}[];
 };
 export type PricesResponse = {
-    services: Service[];
-    categories: Category[];
+	services: Service[];
+	categories: Category[];
 };
 export type SeoResponse = {
-    title: string;
-    description: string;
-    keywords: string;
+	title: string;
+	description: string;
+	keywords: string;
 };
 export type DealResponse = {
-    price: number;
-    old_price: number;
+	price: number;
+	old_price: number;
 };
 export type CreateWebsiteAppointmentResponse = {
-    message: string;
+	message: string;
 };
 export type ClinicDoctor = {
-    clinic_id: number;
-    employee_id: number;
+	clinic_id: number;
+	employee_id: number;
 };
 export type PageMarkdownResponse = {
-    page: {
-        markdown: string;
-        service_ids: number[];
-    };
-    services: {
-        id: number;
-        price: number;
-    }[];
+	page: {
+		markdown: string;
+		service_ids: number[];
+	};
+	services: {
+		id: number;
+		price: number;
+	}[];
 };
 /**
  * @typedef {{
@@ -174,109 +174,76 @@ export type PageMarkdownResponse = {
  */
 /** Client for sending page visits and events to the SL analytics API. */
 export declare class SLClient {
-    #private;
-    /** @param {string} baseUrl Base URL of the SL analytics server. */
-    constructor(baseUrl: string);
-    /**
-     * @param {{ visitor_id: string; referer: string; href: string; ip: string }} payload
-     * @returns {Promise<void>}
-     */
-    pageVisit(payload: {
-        visitor_id: string;
-        referer: string;
-        href: string;
-        ip: string;
-    }): Promise<void>;
-    /**
-     * @param {{ visitor_id: string; event: string; href: string; ip: string; extra?: string }} payload
-     * @returns {Promise<void>}
-     */
-    pageEvent(payload: {
-        visitor_id: string;
-        event: string;
-        href: string;
-        ip: string;
-        extra?: string;
-    }): Promise<void>;
-    /**
-     * @param {{ id: number; locale: Locale }} params
-     * @returns {Promise<DoctorResponse>}
-     */
-    getDoctor({ id, locale }: {
-        id: number;
-        locale: Locale;
-    }): Promise<DoctorResponse>;
-    /** @returns {Promise<PricesResponse>} */
-    getPrices(): Promise<PricesResponse>;
-    /**
-     * @param {{ locale: Locale }} params
-     * @returns {Promise<Doctor[]>}
-     */
-    getMainDoctors({ locale }: {
-        locale: Locale;
-    }): Promise<Doctor[]>;
-    /**
-     * @param {{ locale: Locale }} params
-     * @returns {Promise<DoctorsResponse>}
-     */
-    getDoctors({ locale }: {
-        locale: Locale;
-    }): Promise<DoctorsResponse>;
-    /**
-     * @param {{ pathname: string }} params
-     * @returns {Promise<SeoResponse>}
-     */
-    getSeo({ pathname }: {
-        pathname: string;
-    }): Promise<SeoResponse>;
-    /**
-     * @param {{ name: string }} params
-     * @returns {Promise<DealResponse>}
-     */
-    getDeal({ name }: {
-        name: string;
-    }): Promise<DealResponse>;
-    /**
-     * @param {{ name: string; phone: string; email: string; website: string }} payload
-     * @returns {Promise<CreateWebsiteAppointmentResponse>}
-     */
-    createWebsiteAppointment(payload: {
-        name: string;
-        phone: string;
-        email: string;
-        website: string;
-    }): Promise<CreateWebsiteAppointmentResponse>;
-    /**
-     * @param {{ certificate_id: number; firstname: string; lastname: string }} payload
-     * @returns {Promise<void>}
-     */
-    updateCertificateName(payload: {
-        certificate_id: number;
-        firstname: string;
-        lastname: string;
-    }): Promise<void>;
-    /**
-     * @param {{ patient_id: number }} params
-     * @returns {Promise<AllPlan[]>}
-     */
-    getPlans({ patient_id }: {
-        patient_id: number;
-    }): Promise<AllPlan[]>;
-    /**
-     * @param {{ patient_id: number; plan_id: number }} params
-     * @returns {Promise<PlanResponse>}
-     */
-    getPlan({ patient_id, plan_id }: {
-        patient_id: number;
-        plan_id: number;
-    }): Promise<PlanResponse>;
-    /**
-     * @param {{ pathname: string }} params
-     * @returns {Promise<PageMarkdownResponse>}
-     */
-    getPageMarkdown({ pathname }: {
-        pathname: string;
-    }): Promise<PageMarkdownResponse>;
-    /** @returns {Promise<ClinicDoctor[]>} */
-    getClinicDoctors(): Promise<ClinicDoctor[]>;
+	#private;
+	/** @param {string} baseUrl Base URL of the SL analytics server. */
+	constructor(baseUrl: string);
+	/**
+	 * @param {{ visitor_id: string; referer: string; href: string; ip: string }} payload
+	 * @returns {Promise<void>}
+	 */
+	pageVisit(payload: { visitor_id: string; referer: string; href: string; ip: string }): Promise<void>;
+	/**
+	 * @param {{ visitor_id: string; event: string; href: string; ip: string; extra?: string }} payload
+	 * @returns {Promise<void>}
+	 */
+	pageEvent(payload: { visitor_id: string; event: string; href: string; ip: string; extra?: string }): Promise<void>;
+	/**
+	 * @param {{ id: number; locale: Locale }} params
+	 * @returns {Promise<DoctorResponse>}
+	 */
+	getDoctor({ id, locale }: { id: number; locale: Locale }): Promise<DoctorResponse>;
+	/** @returns {Promise<PricesResponse>} */
+	getPrices(): Promise<PricesResponse>;
+	/**
+	 * @param {{ locale: Locale }} params
+	 * @returns {Promise<Doctor[]>}
+	 */
+	getMainDoctors({ locale }: { locale: Locale }): Promise<Doctor[]>;
+	/**
+	 * @param {{ locale: Locale }} params
+	 * @returns {Promise<DoctorsResponse>}
+	 */
+	getDoctors({ locale }: { locale: Locale }): Promise<DoctorsResponse>;
+	/**
+	 * @param {{ pathname: string }} params
+	 * @returns {Promise<SeoResponse>}
+	 */
+	getSeo({ pathname }: { pathname: string }): Promise<SeoResponse>;
+	/**
+	 * @param {{ name: string }} params
+	 * @returns {Promise<DealResponse>}
+	 */
+	getDeal({ name }: { name: string }): Promise<DealResponse>;
+	/**
+	 * @param {{ name: string; phone: string; email: string; website: string }} payload
+	 * @returns {Promise<CreateWebsiteAppointmentResponse>}
+	 */
+	createWebsiteAppointment(payload: {
+		name: string;
+		phone: string;
+		email: string;
+		website: string;
+	}): Promise<CreateWebsiteAppointmentResponse>;
+	/**
+	 * @param {{ certificate_id: number; firstname: string; lastname: string }} payload
+	 * @returns {Promise<void>}
+	 */
+	updateCertificateName(payload: { certificate_id: number; firstname: string; lastname: string }): Promise<void>;
+	/**
+	 * @param {{ patient_id: number }} params
+	 * @returns {Promise<AllPlan[]>}
+	 */
+	getPlans({ patient_id }: { patient_id: number }): Promise<AllPlan[]>;
+	/**
+	 * @param {{ patient_id: number; plan_id: number }} params
+	 * @returns {Promise<PlanResponse>}
+	 */
+	getPlan({ patient_id, plan_id }: { patient_id: number; plan_id: number }): Promise<PlanResponse>;
+	/**
+	 * @param {{ pathname: string }} params
+	 * @returns {Promise<PageMarkdownResponse>}
+	 */
+	getPageMarkdown({ pathname }: { pathname: string }): Promise<PageMarkdownResponse>;
+	/** @returns {Promise<ClinicDoctor[]>} */
+	getClinicDoctors(): Promise<ClinicDoctor[]>;
 }
